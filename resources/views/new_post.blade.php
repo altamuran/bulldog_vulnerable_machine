@@ -11,6 +11,18 @@
 
         </div>
         @endif
+
+        @if ($message = Session::get('error'))
+
+        <div class="alert alert-warning alert-block">
+
+            <button type="button" class="close" data-dismiss="alert">×</button>
+
+                <strong>{{ $message }}</strong>
+
+        </div>
+        @endif
+	
 	<div class="row">
 	    
 	    <div class="col-md-8 col-md-offset-2">

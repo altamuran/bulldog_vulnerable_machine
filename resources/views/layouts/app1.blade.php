@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Bulldog') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -22,7 +22,9 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="">Bulldog</a>
+           <a class="navbar-brand" href="{{ url('/') }}">
+                    {{ config('app.name', 'Bulldog') }}
+                </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -34,12 +36,12 @@
                   <li class="nav-item">
                     <a class="nav-link" href="#">Artist</a>
                   </li>
-                @auth
                 @guest
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
-                  </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    </li>
                 @endguest
+                @auth
                 @if(Auth::user()->is_admin)
                   <li class="nav-item">
                     <a class="nav-link" href="{{ route('new_post') }}">Admin panel</a>

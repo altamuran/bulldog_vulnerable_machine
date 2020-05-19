@@ -35,20 +35,38 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         //dd($request);
-        $post=$request->all();
-        //dd($post);
-
-        
+        $post=new \App\Post;
+        $title=date("dd-mm-yyyy");
+        $request_post=$request->all();
+        $autor=$request_post["autor"];
+        $title=$request_post["title"];
+        $content=$request_post["content"];
         $image = $request->file('image');
-        //dd($image);
-        $name = $image->getClientOriginalName();
-        $destinationPath = public_path('images');
-        $image->move($destinationPath, $name);
-        $url = asset("img/".$name);
+        
+        if($image!=null){
+            $name = $image->getClientOriginalName();
+            $destinationPath = public_path('images');
+            $image->move($destinationPath, $name);
+            $url = asset("/images/".$name);
+            $post->image_path=$url;
+        }
+       // dd($title,"\n".$autor,"\n".$content);
+        if($title!=null){
+            if($title!="\n"){
+                $post->title=$title;
+                $post->autor=$autor;
+                $post->content=$content;
+                $post->save();
+                return back()->with('success','You have successfully upload image.');
+            }
+        }else
+            return back()->with('error','Please,fill the request fileds');
+
+
         //dd($url);
         //$this->save();
 
-        return back()->with('success','You have successfully upload image.')->with('image',$url);
+        
         //Storage::disk('local')->put('file.txt', 'Contents');
     }
 

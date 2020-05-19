@@ -7,7 +7,11 @@
             <article class="white-panel">
                 <div class="row">
                     <div class="col-4">
-                            <img src="https://i.ytimg.com/vi/ONUCwXyUu9g/maxresdefault.jpg"  class="img-fluid" alt="Responsive image">
+                            @if ($p->image_path !="")
+                            <img src="{{$p->image_path}}"  class="img-fluid" alt="Responsive image">
+                            @else
+                            <img src="https://image.flaticon.com/icons/svg/107/107384.svg"  class="img-fluid" alt="Responsive image">
+                            @endif
                     </div>
                     <div class="col-4">
                     <h4><a href="{{ route('post',['id' => 1]) }}">{{$p->title}}</a></h4>
